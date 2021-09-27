@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testbot/constants.dart';
 import 'package:testbot/models/field.dart';
+import 'package:testbot/screens/welcome.dart';
 import 'package:testbot/services/createIntent.dart';
 import 'package:testbot/widgets/customButton.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -35,7 +36,12 @@ class _AddFieldState extends State<AddField> {
 
     List<DropdownMenuItem<String>> ans = [];
     myList.forEach((element) {
-      ans.add(DropdownMenuItem<String>(value: element, child: Text(element , style: GoogleFonts.poppins(color: Colors.white),)));
+      ans.add(DropdownMenuItem<String>(
+          value: element,
+          child: Text(
+            element,
+            style: GoogleFonts.poppins(color: Colors.white),
+          )));
     });
 
     return ans;
@@ -72,7 +78,7 @@ class _AddFieldState extends State<AddField> {
                         controller: fieldController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Bot Name cannot be blank.';
+                            return 'Field Name cannot be blank.';
                           }
                           return null;
                         },
@@ -111,7 +117,7 @@ class _AddFieldState extends State<AddField> {
                         height: 12,
                       ),
                       Container(
-                        width: width*0.9,
+                        width: width * 0.9,
                         child: DropdownButton(
                           dropdownColor: textGreenColor,
                           value: selectedType,
@@ -141,7 +147,7 @@ class _AddFieldState extends State<AddField> {
                       width: width,
                       text: "Add Field",
                       onPressed: () {
-                        if(fieldFormKey.currentState!.validate()){
+                        if (fieldFormKey.currentState!.validate()) {
                           Field newField = new Field(
                               name: fieldController.text, type: selectedType);
                           fields.add(newField);
@@ -164,6 +170,11 @@ class _AddFieldState extends State<AddField> {
                         await CreateIntent()
                             .createIntent(widget.intentName, projectID, fields);
                         context.loaderOverlay.hide();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WelcomeScreen()),
+                            (route) => false);
                       },
                       color: buttonGreenColor,
                       textColor: Colors.white,

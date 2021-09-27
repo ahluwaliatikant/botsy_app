@@ -124,7 +124,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeProvider.themeOf(themeContext).data,
               title: "Botsy",
-              home: Chat(),
+              home: WelcomeScreen(),
             ),
           ),
         ),
