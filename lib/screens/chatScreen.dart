@@ -110,9 +110,66 @@ class _ChatState extends State<Chat> {
 
     // TODO Create SpeechContexts
     // Create an audio InputConfig
+    var biasList = SpeechContextV2Beta1(
+        phrases: [
+          'Dialogflow CX',
+          'Dialogflow Essentials',
+          'Action Builder',
+          'HIPAA'
+        ],
+        boost: 20.0
+    );
+
+    // See: https://cloud.google.com/dialogflow/es/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.InputAudioConfig
+    var config = InputConfigV2beta1(
+        encoding: 'AUDIO_ENCODING_LINEAR_16',
+        languageCode: 'en-US',
+        sampleRateHertz: 16000,
+        singleUtterance: false,
+        speechContexts: [biasList]
+    );
 
     // TODO Make the streamingDetectIntent call, with the InputConfig and the audioStream
+    final responseStream = dialogflow!.streamingDetectIntent(config, _audioStream!.stream);
+
     // TODO Get the transcript and detectedIntent and show on screen
+    responseStream.listen((data) {
+      //print('----');
+      setState(() {
+        //print(data);
+        String transcript = data.recognitionResult.transcript;
+        String queryText = data.queryResult.queryText;
+        String fulfillmentText = data.queryResult.fulfillmentText;
+
+        if(fulfillmentText.isNotEmpty) {
+
+          ChatMessage message = new ChatMessage(
+            text: queryText,
+            name: "You",
+            type: true,
+          );
+
+          ChatMessage botMessage = new ChatMessage(
+            text: fulfillmentText,
+            name: "Bot",
+            type: false,
+          );
+
+          _messages.insert(0, message);
+          _textController.clear();
+          _messages.insert(0, botMessage);
+
+        }
+        if(transcript.isNotEmpty) {
+          _textController.text = transcript;
+        }
+
+      });
+    },onError: (e){
+      //print(e);
+    },onDone: () {
+      //print('done');
+    });
   }
 
   // The chat interface
