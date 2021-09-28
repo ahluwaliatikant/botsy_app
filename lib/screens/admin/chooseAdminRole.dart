@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:testbot/constants.dart';
 import 'package:testbot/screens/admin/createBot.dart';
+import 'package:testbot/screens/admin/enterEmail.dart';
 import 'package:testbot/screens/chatScreen.dart';
 import 'package:testbot/widgets/customButton.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:testbot/screens/admin/chooseAdminRole.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class ChooseAdminRole extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "Botsy",
+                "Hi Admin !",
                 style: GoogleFonts.poppins(
                   color: textGreenColor,
                   fontSize: 40,
@@ -29,13 +29,13 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
               SvgPicture.asset(
-                "assets/images/botNew.svg",
+                "assets/images/admin.svg",
                 width: width*0.7,
               ),
               Column(
                 children: [
                   Text(
-                    "Choose Your Role",
+                    "Do you want to:",
                     style: GoogleFonts.poppins(
                       color: Colors.white,
                       fontSize: 18,
@@ -47,9 +47,9 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   CustomButton(
                     width: width,
-                    text: "Admin",
+                    text: "Create A Chatbot",
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChooseAdminRole()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateBot()));
                     },
                     color: buttonGreenColor,
                     textColor: Colors.white,
@@ -59,9 +59,9 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   CustomButton(
                     width: width,
-                    text: "User",
+                    text: "View Responses",
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => EnterEmail()));
                     },
                     color: buttonGreenColor,
                     textColor: Colors.white,

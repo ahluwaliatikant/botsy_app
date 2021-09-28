@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "280386602838",
+    "project_id": "testagent-gjkk",
+    "storage_bucket": "testagent-gjkk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280386602838:android:e263842baeca9d649d38f7",
+        "android_client_info": {
+          "package_name": "com.atikant.testbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280386602838-n3ps1l9ud5fquoskul5649knicisqnj7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVu26lbRa5nUoF7LOBBVHHjMRmQrBXCiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280386602838-n3ps1l9ud5fquoskul5649knicisqnj7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

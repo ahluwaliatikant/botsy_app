@@ -22,7 +22,13 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+dependencies {
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+}
 
 android {
     compileSdkVersion 30
@@ -32,6 +38,7 @@ android {
         applicationId "com.atikant.testbot"
         minSdkVersion 21
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

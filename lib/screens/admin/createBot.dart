@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testbot/constants.dart';
 import 'package:testbot/screens/admin/addField.dart';
+import 'package:testbot/services/firestoreServices.dart';
 import 'package:testbot/widgets/customButton.dart';
 
 class CreateBot extends StatelessWidget {
   final botNameController = new TextEditingController();
+  final emailController = new TextEditingController();
   final botNameFormKey = GlobalKey<FormState>();
 
   @override
@@ -49,6 +51,48 @@ class CreateBot extends StatelessWidget {
               key: botNameFormKey,
               child: Column(
                 children: [
+                  TextFormField(
+                    controller: emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email ID cannot be blank.';
+                      }
+                      return null;
+                    },
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    cursorColor: Colors.white,
+                    decoration: InputDecoration(
+                      hintText: "Email ID",
+                      hintStyle: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: buttonGreenColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: buttonGreenColor, width: 2.0),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   TextFormField(
                     controller: botNameController,
                     validator: (value) {
@@ -105,8 +149,10 @@ class CreateBot extends StatelessWidget {
             CustomButton(
                 width: width,
                 text: "Create Bot",
-                onPressed: () {
+                onPressed: () async {
                   if (botNameFormKey.currentState!.validate()) {
+                    await FirestoreService().addToAdminToChatbotsMapping(
+                        botNameController.text, emailController.text);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:testbot/constants.dart';
-import 'package:testbot/screens/admin/createBot.dart';
-import 'package:testbot/screens/changeTheme.dart';
-import 'package:testbot/screens/chatScreen.dart';
-import 'package:testbot/screens/getName.dart';
+import 'package:testbot/screens/admin/allResponses.dart';
 import 'package:testbot/screens/welcome.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'package:testbot/screens/changeTheme.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -129,27 +128,5 @@ class MyApp extends StatelessWidget {
           ),
         ),
       );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
-  final String? title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title??""),
-        ),
-        body: Center(
-          child: Chat(),
-        ),
-    );
   }
 }
