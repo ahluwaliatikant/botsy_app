@@ -28,7 +28,9 @@ class _AddFieldState extends State<AddField> {
     "Date",
     "URL",
     "Long Number",
-    "Integer"
+    "Integer",
+    "Email",
+    "Age",
   ];
 
   List<DropdownMenuItem<String>> generateDropdownItems(List<String> myList) {

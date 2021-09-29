@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sound_stream/sound_stream.dart';
-
-// TODO import Dialogflow
 import 'package:dialogflow_grpc/dialogflow_grpc.dart';
 import 'package:dialogflow_grpc/generated/google/cloud/dialogflow/v2beta1/session.pb.dart';
 import 'package:testbot/screens/changeTheme.dart';
@@ -28,7 +26,7 @@ class _ChatState extends State<Chat> {
   StreamSubscription<List<int>>? _audioStreamSubscription;
   BehaviorSubject<List<int>>? _audioStream;
 
-  // TODO DialogflowGrpc class instance
+
   DialogflowGrpcV2Beta1? dialogflow;
 
   @override
@@ -55,8 +53,8 @@ class _ChatState extends State<Chat> {
 
     await Future.wait([_recorder.initialize()]);
 
-    // TODO Get a Service account
-    // Get a Service account
+
+
     final serviceAccount = ServiceAccount.fromString(
         '${(await rootBundle.loadString('assets/credentials.json'))}');
     // Create a DialogflowGrpc Instance
@@ -73,7 +71,7 @@ class _ChatState extends State<Chat> {
     print(text);
     _textController.clear();
 
-    //TODO Dialogflow Code
+
     ChatMessage message = ChatMessage(
       text: text,
       name: "You",
@@ -108,8 +106,8 @@ class _ChatState extends State<Chat> {
       _audioStream!.add(data);
     });
 
-    // TODO Create SpeechContexts
-    // Create an audio InputConfig
+
+
     var biasList = SpeechContextV2Beta1(
         phrases: [
           'Dialogflow CX',
@@ -120,7 +118,7 @@ class _ChatState extends State<Chat> {
         boost: 20.0
     );
 
-    // See: https://cloud.google.com/dialogflow/es/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.InputAudioConfig
+
     var config = InputConfigV2beta1(
         encoding: 'AUDIO_ENCODING_LINEAR_16',
         languageCode: 'en-US',
@@ -129,10 +127,10 @@ class _ChatState extends State<Chat> {
         speechContexts: [biasList]
     );
 
-    // TODO Make the streamingDetectIntent call, with the InputConfig and the audioStream
+
     final responseStream = dialogflow!.streamingDetectIntent(config, _audioStream!.stream);
 
-    // TODO Get the transcript and detectedIntent and show on screen
+
     responseStream.listen((data) {
       //print('----');
       setState(() {
@@ -172,9 +170,6 @@ class _ChatState extends State<Chat> {
     });
   }
 
-  // The chat interface
-  //
-  //------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -251,10 +246,7 @@ class _ChatState extends State<Chat> {
   }
 }
 
-//------------------------------------------------------------------------------------
-// The chat message balloon
-//
-//------------------------------------------------------------------------------------
+
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.text, this.name, this.type});
 
