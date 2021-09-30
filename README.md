@@ -17,6 +17,9 @@ Botsy is a multipurpose Chatbot. It can handle multiple scenarios and can replac
 ## Demo Video Link
 https://www.youtube.com/watch?v=DaE1Rkqd0gc
 
+## You can download the apk here
+https://drive.google.com/file/d/1bHhJI2e8zH8L5GESlk8AVJ5GmyD6xwZm/view?usp=sharing
+
 ## How It Works ?
 - Every time an Admin tries to create a chatbot, a request is made to our NodeJS server which uses the Dialogflow library to create new Intents in our Dialogflow agent matching the fields entered.
 - When the user types messages our uses voice commands to interact with the bot, Dialogflow finds the matching intent in our agent. If no matching intent is there the Default fallback intent is called.
@@ -32,3 +35,7 @@ https://www.youtube.com/watch?v=DaE1Rkqd0gc
 | Change Theme   | View Responses        | Create Bot        |
 |----------------------------------|-----------------|-----------------|
 | ![](https://github.com/ahluwaliatikant/botsy_app/blob/voice/assets/screenshots/changeThemeGif.gif) | ![](https://github.com/ahluwaliatikant/botsy_app/blob/voice/assets/screenshots/createBot.png) | ![](https://github.com/ahluwaliatikant/botsy_app/blob/voice/assets/screenshots/viewResponses.png) |
+
+
+## Viewers Count
+<img align="left" src = "https://profile-counter.glitch.me/botsy_app/count.svg" alt ="Loading">
